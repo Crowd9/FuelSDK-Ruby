@@ -146,7 +146,7 @@ module FuelSDK
         end
 
         if params && params.has_key?("jwt") then
-          jwt = JWT.decode(params["jwt"], @appsignature, true);
+          jwt, header  = JWT.decode(params["jwt"], @appsignature, true);
           @authToken = jwt['request']['user']['oauthToken']
           @authTokenExpiration = Time.new + jwt['request']['user']['expiresIn']
           @internalAuthToken = jwt['request']['user']['internalOauthToken']
